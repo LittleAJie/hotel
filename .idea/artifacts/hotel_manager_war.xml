@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="hotel-manager:war">
+    <output-path>$PROJECT_DIR$/hotel-manager/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>hotel-manager</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="hotel-manager-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="hotel-manager:war exploded" />
+    </root>
+  </artifact>
+</component>

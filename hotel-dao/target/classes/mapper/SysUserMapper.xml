@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.manong.dao.SysUserMapper">
+
+    <!-- 定义UserMap -->
+    <resultMap id="BaseResultMap" type="com.manong.entity.SysUser">
+        <id column="id"  property="id" />
+        <result column="userName" property="userName" />
+        <result column="password" property="password" />
+        <result column="realName" property="realName" />
+        <result column="sex" property="sex" />
+        <result column="deptId" property="deptId" />
+        <result column="status" property="status" />
+        <result column="email" property="email" />
+        <result column="phone"  property="phone" />
+        <result column="userType" property="userType" />
+        <result column="hireDate"  property="hireDate" />
+        <result column="createdBy" property="createdBy" />
+        <result column="createDate" property="createDate" />
+        <result column="modifyBy" property="modifyBy" />
+        <result column="modifyDate"  property="modifyDate" />
+        <result column="remark" property="remark" />
+    </resultMap>
+
+
+    <!-- 用户角色关系配置 -->
+    <resultMap id="userRoleResultMap" type="com.manong.entity.SysUser" extends="BaseResultMap">
+        <!-- 一对多 -->
+        <collection property="roleList" column="id" ofType="com.manong.entity.Role" select="com.manong.dao.RoleMapper.findRoleListByUserId"/>
+    </resultMap>
+
+    <!-- 用户部门关系配置 -->
+    <resultMap id="userDeptResultMap" type="com.manong.entity.SysUser" extends="BaseResultMap">
+        <!-- 一对一 -->
+        <association property="dept" javaType="com.manong.entity.Dept">
+            <id property="id" column="id"/>
+            <result property="deptName" column="deptName"/>
+            <result property="address" column="address"/>
+        </association>
+    </resultMap>
+
+    <!-- 根据用户名查询用户信息的方法 -->
+    <select id="findUserByUserName" resultMap="userRoleResultMap">
+        select * from sys_user where userName = #{userName}
+    </select>
+
+
+    <select id="findUserList" resultMap="userDeptResultMap">
+        select u.*,d.deptName from sys_user u left join sys_dept d on d.id = u.deptId
+        <where>
+            <if test="userName!=null and userName!=''">
+                and u.userName like concat('%',#{userName},'%')
+            </if>
+            <if test="realName!=null and realName!=''">
+                and u.realName like concat('%',#{realName},'%')
+            </if>
+            <if test="sex!=null">
+                and u.sex = #{sex}
+            </if>
+            <if test="deptId!=null">
+                and u.deptId = #{deptId}
+            </if>
+            <if test="status!=null">
+                and u.status = #{status}
+            </if>
+            <if test="startDate!=null">
+               <![CDATA[ and u.hireDate >= #{startDate} ]]>
+            </if>
+            <if test="endDate!=null">
+               <![CDATA[ and u.hireDate <= #{endDate} ]]>
+            </if>
+            <if test="userType!=null">
+                and u.userType = #{userType}
+            </if>
+        </where>
+    </select>
+
+
+    <insert id="insert" parameterType="com.manong.entity.SysUser">
+        insert into sys_user (userName, password,
+          realName, sex, deptId,
+          status, email, phone,
+          userType, hireDate, createdBy,
+          createDate, remark)
+        values ( #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+          #{realName,jdbcType=VARCHAR}, #{sex,jdbcType=INTEGER}, #{deptId,jdbcType=INTEGER},
+          #{status,jdbcType=INTEGER}, #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR},
+          #{userType,jdbcType=INTEGER}, #{hireDate,jdbcType=TIMESTAMP}, #{createdBy,jdbcType=INTEGER},
+          #{createDate,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR})
+      </insert>
+
+
+    <update id="updateUser" parameterType="com.manong.entity.SysUser">
+        update sys_user
+        <set>
+            <if test="userName != null">
+                userName = #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="realName != null">
+                realName = #{realName,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                sex = #{sex,jdbcType=INTEGER},
+            </if>
+            <if test="deptId != null">
+                deptId = #{deptId,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="email != null">
+                email = #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                phone = #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="userType != null">
+                userType = #{userType,jdbcType=INTEGER},
+            </if>
+            <if test="hireDate != null">
+                hireDate = #{hireDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createdBy != null">
+                createdBy = #{createdBy,jdbcType=INTEGER},
+            </if>
+            <if test="createDate != null">
+                createDate = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modifyBy != null">
+                modifyBy = #{modifyBy,jdbcType=INTEGER},
+            </if>
+            <if test="modifyDate != null">
+                modifyDate = #{modifyDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+</mapper>

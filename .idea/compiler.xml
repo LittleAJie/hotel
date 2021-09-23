@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="hotel-dao" />
+        <module name="hotel-utils" />
+        <module name="hotel-manager" />
+        <module name="hotel-entity" />
+        <module name="hotel-web" />
+        <module name="hotel-service" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="hotel-dao" target="1.5" />
+      <module name="hotel-entity" target="1.5" />
+      <module name="hotel-manager" target="1.5" />
+      <module name="hotel-parent" target="1.5" />
+      <module name="hotel-service" target="1.5" />
+      <module name="hotel-utils" target="1.5" />
+      <module name="hotel-web" target="1.5" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

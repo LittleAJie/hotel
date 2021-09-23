@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/hotel-dao/hotel-dao.iml" filepath="$PROJECT_DIR$/hotel-dao/hotel-dao.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hotel-entity/hotel-entity.iml" filepath="$PROJECT_DIR$/hotel-entity/hotel-entity.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hotel-manager/hotel-manager.iml" filepath="$PROJECT_DIR$/hotel-manager/hotel-manager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hotel-parent.iml" filepath="$PROJECT_DIR$/hotel-parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hotel-service/hotel-service.iml" filepath="$PROJECT_DIR$/hotel-service/hotel-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hotel-utils/hotel-utils.iml" filepath="$PROJECT_DIR$/hotel-utils/hotel-utils.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hotel-web/hotel-web.iml" filepath="$PROJECT_DIR$/hotel-web/hotel-web.iml" />
+    </modules>
+  </component>
+</project>
